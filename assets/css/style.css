@@ -191,3 +191,68 @@ body {
     pointer-events: none; /* 💡 這一行最重要，這樣手指才能穿透 Canvas 點到裡面的貓咪圖片！ */
     z-index: 9999;
 }
+
+@media (max-width: 768px) {
+    /* 1. 調整主容器，改用自動高度，避免內容把頂部卡片擠出螢幕外 */
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto; /* 允許手機上下滾動 */
+        padding: 15px 10px;
+    }
+
+    .app-container {
+        height: auto;
+        gap: 20px; /* 縮小元件之間的間距 */
+    }
+
+    /* 2. 縮小上方三張模式卡片的尺寸，騰出垂直空間 */
+    .cards-container {
+        gap: 10px;
+        margin-bottom: 5px;
+    }
+
+    .experiment-card {
+        padding: 8px;
+    }
+
+    .card-image {
+        height: 70px; /* 電腦版可能很大，手機版縮小才不會卡住 */
+    }
+
+    /* 3. 縮小中間圓形大圖的尺寸，防止大圖把按鈕塞爆 */
+    #main-cat {
+        width: 260px;  /* 從原本可能較大的尺寸縮小到適合手機的 260px */
+        height: 260px;
+        margin: 15px auto;
+    }
+
+    /* 4. 🔥 徹底解決按鈕錯位！讓三個按鈕平分空間、整齊排列 */
+    .button-group {
+        display: flex;
+        flex-direction: row; /* 強制橫向排列 */
+        flex-wrap: wrap;     /* 如果真的太擠才換行 */
+        justify-content: center;
+        align-items: center;
+        gap: 8px;            /* 縮小按鈕之間的間距 */
+        width: 100%;
+        max-width: 340px;    /* 限制整體按鈕區域的寬度 */
+        margin: 0 auto;
+    }
+
+    /* 5. 讓每個按鈕的大小在手機上變得更精緻 */
+    .button {
+        flex: 1;             /* 讓按鈕自動等寬分配 */
+        min-width: 90px;     /* 保證按鈕不會縮小到字體重疊 */
+        padding: 10px 12px;  /* 稍微縮減手機版內襯墊 */
+        font-size: 14px;     /* 稍微降低微幅字體大小 */
+        white-space: nowrap; /* 強制文字不換行 */
+    }
+
+    /* 6. 互動統計面板優化 */
+    .stats-panel {
+        margin-top: 10px;
+        padding: 10px;
+        font-size: 14px;
+    }
+}
