@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程式動畫課程</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght=400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 🎨 唯一額外追加：高效能 Canvas 粒子畫布，覆蓋在最上層但滑鼠可以穿透點擊 */
+        #effects-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* 📊 數據面板：讓它美觀地融入你原本的設計中 */
+        .stats-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            margin: 2rem auto;
+            max-width: 460px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            color: var(--text-muted);
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="effects-canvas"></canvas>
+
+    <div class="page-loader" data-page-loader>
+        <div class="page-loader__particles" data-loader-particles></div>
+        <div class="page-loader__hud">
+            <h2 class="page-loader__label">程式動畫課程 LOADING...</h2>
+            <div class="page-loader__bar"><span data-loader-progress></span></div>
+            <div class="page-loader__percent" data-loader-percent>0%</div>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="shape-cloud"></div>
+            <h1 class="hero__headline"><span>程式動畫課程</span></h1>
+            <div class="hero__actions">
+                <button class="button button--primary" id="btn-enter">
+                    進入
+                </button>
+            </div>
+        </section>
+
+        <section class="section" id="playground">
+            <p class="section-subtitle">點擊下方卡片，體驗不同互動效果</p>
+
+            <div class="experiments-grid" id="experiments-grid">
+            </div>
+
+            <div class="main-experiment">
+                <h3>目前特效模式：<span id="stat-mode" style="color: var(--accent-2);">跟隨模式</span></h3>
+
+                <div class="cat-container" id="main-cat">
+                    <img src="8b374a4f-90c3-46eb-843d-6b4aa15c9706.jpg" alt="主題" class="main-cat-img" id="main-cat-img">
+                </div>
+
+                <div class="controls">
+                    <button class="button" id="btn-audio">音效</button>
+                    <input type="file" id="image-uploader" accept="image/*" style="display: none;">
+                    <button class="button" id="btn-upload"
+                        style="background: var(--surface); color: white; border: 1px solid rgba(255,255,255,0.15);">上傳圖片
+                        📂</button>
+                    <button class="button" id="btn-reset"
+                        style="background: rgba(255, 75, 75, 0.2); color: #ff7676; border: 1px solid rgba(255, 75, 75, 0.4);">重置圖片
+                        🔄</button>
+                </div>
+
+                <div class="stats-panel">
+                    <div>互動次數：<span id="stat-clicks" style="color: var(--accent-1); font-weight: bold;">0</span> 次</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="src/core/App.js"></script>
+</body>
+
+</html>
